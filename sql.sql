@@ -1,8 +1,8 @@
 
-CREATE DATABASE api_video;
+CREATE DATABASE api_video2;
 
 
-USE api_video;
+USE api_video2;
 
 
 CREATE TABLE IF NOT EXISTS usuarios (
@@ -17,3 +17,4 @@ CREATE TABLE IF NOT EXISTS usuarios (
 
 INSERT INTO usuarios (LOGIN, NOME, EMAIL, SENHA, ATIVO)
 VALUES ('Eduardo', 'Eduardo Ataíde de Oliveira', 'eduardoataidedeoliveira@gmail.com', 'banana', b'1');
+
