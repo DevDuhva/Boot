@@ -5,7 +5,7 @@ header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db = "api_video";
+$db = "api_video2";
 
     $conn = new mysqli($host, $user, $pass, $db);
 
@@ -15,7 +15,7 @@ $db = "api_video";
     exit;
 }
 
-
+file_put_contents("log.txt", date('Y-m-d H:i:s') . " - Método: " . $_SERVER['REQUEST_METHOD'] . "\n", FILE_APPEND);
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
@@ -96,6 +96,20 @@ case 'PUT':
 
 $conn->close();
 
+if ($conn->connect_error) {
+    die("Falha na conexão: " . $conn->connect_error);
+} 
 
+// Testar se a tabela existe
+$result = $conn->query("SHOW TABLES LIKE 'usuarios'");
+if ($result && $result->num_rows == 1) {
+    echo json_encode(["status" => "Conectado e tabela 'usuarios' existe"]);
+} else {
+    echo json_encode(["error" => "Tabela 'usuarios' não encontrada"]);
+}
+exit;
+
+
+?>
 
 
