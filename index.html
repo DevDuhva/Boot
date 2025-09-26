@@ -1,79 +1,155 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Guia Bootstrap</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciar Usuários</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-        <li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
-      </ul>
-    </div>
-  </nav>
 <div class="container mt-4">
+  <h2 class="mb-4">Gerenciar Usuários</h2>
 
-<div class="row" >
-  <div class="col-12">
-    <img src="bolo.jpg" alt="Banner Confeitaria" class="img-container w-30       d-block mx-auto       " />
-  </div>
+  <form class="row g-2 mb-3">
+    <input type="hidden" id="id">
 
-</div>
-
-
-
-
-    <div class="row">
-            <div class="col-4">
-        <div class="nav flex-column nav-pills" aria-orientation="vertical">
-          <span class="nav-link active">Menu Principal</span>
-          <a class="nav-link" href="#">Início</a>
-          <a class="nav-link" href="#">Perfil</a>
-          <a class="nav-link" href="#">Mensagens</a>
-          <a class="nav-link" href="#">Configurações</a>
-          <a class="nav-link" href="#">Ajuda</a>
-          <a class="nav-link" href="#">Sair</a>
-        </div>
+    <div class="col-md-2">
+      <input type="text" id="login" class="form-control" placeholder="Login">
     </div>
 
-      <div class="col-8">
-        <section>
-          <h2>Bem-vindo à Doce Magia Confeitaria!</h2>
-          <p>Aqui, transformamos sabores em momentos inesquecíveis. Com receitas artesanais e ingredientes selecionados, cada doce é feito com carinho para adoçar o seu dia.</p>
-
-          <h3>Nossos Destaques:</h3>
-          <ul>
-            <li>Bolos personalizados para todas as ocasiões — aniversários, casamentos, festas especiais e eventos corporativos.</li>
-            <li>Doces finos e sobremesas deliciosas que derretem na boca, preparados com ingredientes frescos e de alta qualidade.</li>
-            <li>Tortas, cupcakes, cookies e muito mais, feitos diariamente com frescor e qualidade para garantir sabor e textura perfeitos.</li>
-            <li>Opções sem glúten, sem lactose e veganas, para que todos possam se deliciar sem preocupações.</li>
-          </ul>
-
-          <h3>Por que escolher a Doce Magia?</h3>
-          <p>Porque acreditamos que cada pedaço deve ser uma experiência única. Seja para presentear, celebrar ou simplesmente se deliciar, nossa confeitaria é o lugar ideal para quem ama sabor e beleza em cada detalhe.</p>
-          <p>Nossos confeiteiros são apaixonados pelo que fazem e dedicam atenção especial a cada receita, garantindo produtos que impressionam pelo sabor, aroma e apresentação.</p>
-          <p>Além disso, oferecemos atendimento personalizado para ajudar você a escolher o doce perfeito para sua ocasião especial.</p>
-
-          <h3>Visite-nos e descubra:</h3>
-          <ul>
-            <li>Ambiente acolhedor e convidativo para você desfrutar dos nossos produtos com tranquilidade.</li>
-            <li>Novidades e promoções exclusivas em datas especiais.</li>
-            <li>Serviço de encomendas com entrega rápida e segura.</li>
-          </ul>
-
-          <p>Venha nos visitar e descubra o verdadeiro sabor da doçura! Estamos esperando por você para adoçar seus melhores momentos.</p>
-        </section>
-      </div>
-
+    <div class="col-md-2">
+      <input type="text" id="nome" class="form-control" placeholder="Nome">
     </div>
+
+    <div class="col-md-2">
+      <input type="email" id="email" class="form-control" placeholder="Email">
+    </div>
+
+    <div class="col-md-2">
+      <input type="password" id="senha" class="form-control" placeholder="Senha">
+    </div>
+
+    <div class="col-md-2">
+      <select id="ativo" class="form-select">
+        <option value="1" selected>Sim</option>
+        <option value="0">Não</option>
+      </select>
+    </div>
+
+    <div class="col-md-2 d-flex gap-2">
+      <button type="button" class="btn btn-success" onclick="salvar()">Salvar</button>
+      <button type="reset" class="btn btn-secondary" onclick="limpar()">Cancelar</button>
+    </div>
+
+    <div class="col-md-12 d-flex gap-2 mt-2">
+      <input type="text" id="pesquisa" class="form-control" placeholder="Pesquisar...">
+      <button type="button" class="btn btn-primary" onclick="carregarPesquisa()">Pesquisar</button>
+      <button type="button" class="btn btn-outline-dark" onclick="carregar()">Listar Todos</button>
+    </div>
+  </form>
+
+  <div class="table-responsive">
+    <table id="tabela" class="table table-bordered table-striped align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Login</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Ativo</th>
+          <th class="text-center">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
   </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const API_URL = "http://localhost/api/usuarios.php";
+const tbody = document.querySelector("#tabela tbody");
+
+function carregar(pesquisa = "") {
+    let url = API_URL;
+    if (pesquisa) {
+        url += "?pesquisa=" + encodeURIComponent(pesquisa);
+    }
+
+    fetch(url)
+        .then(resposta => resposta.json())
+        .then(dados => {
+            dados.forEach(usuario => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${usuario.ID}</td>
+                    <td>${usuario.LOGIN}</td>
+                    <td>${usuario.NOME}</td>
+                    <td>${usuario.EMAIL}</td>
+                    <td>${usuario.ATIVO == 1 ? "Sim" : "Não"}</td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-warning" onclick='editar(${JSON.stringify(usuario)})'>Editar</button>
+                        <button class="btn btn-sm btn-danger" onclick='excluir(${usuario.ID})'>Excluir</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        });
+}
+
+function carregarPesquisa() {
+    const valor = document.getElementById("pesquisa").value;
+    carregar(valor);
+}
+
+async function salvar() {
+const id = document.getElementById("id").value;
+const login = document.getElementById("login").value;
+const nome = document.getElementById("nome").value;
+ const email = document.getElementById("email").value;
+const senha = document.getElementById("senha").value;
+const ativo = document.getElementById("ativo").value;
+
+const payload = { ID: id, LOGIN: login, NOME: nome, EMAIL: email, SENHA: senha, ATIVO: ativo };
+ const metodo = id ? "PUT" : "POST";
+
+    await fetch(API_URL, { method: metodo, body: JSON.stringify(payload) });
+
+
+    limpar();
+    carregar();
+}
+
+function editar(usuario) {
+    document.getElementById("id").value = usuario.ID;
+    document.getElementById("login").value = usuario.LOGIN;
+    document.getElementById("nome").value = usuario.NOME;
+    document.getElementById("email").value = usuario.EMAIL;
+    document.getElementById("senha").value = usuario.SENHA;
+    document.getElementById("ativo").value = usuario.ATIVO;
+}
+
+async function excluir(id) {
+    if (confirm("Deseja excluir este usuário?")) {
+        await fetch(API_URL + "?id=" + id, { method: "DELETE" });
+        carregar();
+    }
+}
+
+function limpar() {
+    document.getElementById("id").value = "";
+    document.getElementById("login").value = "";
+    document.getElementById("nome").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("senha").value = "";
+    document.getElementById("ativo").value = "1";
+}
+
+carregar();
+</script>
+
 </body>
 </html>
+>
